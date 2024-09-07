@@ -1,0 +1,13 @@
+---
+
+- include_tasks: "{{role_path}}/tasks/shared:/create app_dir.yml"
+
+- name: download Google Chrome
+  get_url:
+    url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    dest: "{{app_dir}}/{{installer_deb}}"
+
+- name: Install a .deb package
+  become: true
+  ansible.builtin.apt:
+    deb: "{{app_dir}}/{{installer_deb}}"
